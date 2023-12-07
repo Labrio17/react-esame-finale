@@ -1,11 +1,20 @@
-import { UserType } from "./users.type";
+import { EventsType } from "./events.type";
 
-const URL = "https://random-data-api.com/api/users/random_user?size=10"
+const URL = "https://its-events.davide-mantovani.workers.dev/events/"
 
-export const getUsers = async (): Promise<UserType[]> => {
+export const getEvents = async (): Promise<EventsType[]> => {
     const res: Response = await fetch(URL);
     if(res.status === 200){
-        const data = (await res.json()) as  UserType[];
+        const data = (await res.json()) as  EventsType[];
+        return data;
+    }
+    return [];
+}
+
+export const getEventDetail = async (eventID : number): Promise<EventsType[]> => {
+    const res: Response = await fetch(`${URL}${eventID}`);
+    if(res.status === 200){
+        const data = (await res.json()) as  EventsType[];
         return data;
     }
     return [];

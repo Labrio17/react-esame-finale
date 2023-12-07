@@ -1,30 +1,29 @@
 import { useParams } from "react-router-dom";
-import { useUsers } from "../hooks/useUsers";
-import { useEffect, useState } from "react";
-import { UserType } from "../repo/users.type";
-import UserCard from '../components/UserCard';
+import { useEffect} from "react";
+import { useEventDetail } from "../hooks/useEventDetail";
 
 
 const DetailPage = () => {
   const { id } = useParams();
-  const { users, isLoading } = useUsers();
-  const [user, setUser] = useState<UserType>();
+  const { eventDetail, getDetail, isLoading } = useEventDetail();
   useEffect(() => {
-    try {
-      //converto id in numero e salvo il valore all'indice id con setUser (usando parseInt)
-      if (id) {
-        const idNum: number = parseInt(id);
-        setUser(users[idNum]);
+
+       if (id) {
+         //converto id in numero e salvo il valore all'indice id con setUser (usando parseInt)
+         const idNum: number = parseInt(id);
+        getDetail(idNum);
+       
       }
-    } catch (e) {
-      console.error(e);
+    },[id] );
+    if (isLoading  || !eventDetail) {
+      return <p> caricamento ...</p>
     }
-  }, [id, isLoading, users]);
+      console.log(eventDetail);
   return (
-    user && <div>
-        <UserCard user={user} detailPath={`/`} />
+   <div>
+        va {eventDetail.name}
     </div>
   );
-};
 
+  }
 export default DetailPage;

@@ -1,18 +1,18 @@
-import UserCard from '../components/UserCard';
-import { useUsers } from '../hooks/useUsers'
+import EventCard from '../components/EventCard';
+import { useEvents } from '../hooks/useEvents'
 
 const HomePage = () =>{
     
   // inizializzo l'hook useUSers
-  const {users,isLoading} = useUsers();
+  const {events,isLoading} = useEvents();
   if(isLoading){
     return <p>loading data...</p>
   }
 
   return <div>
-    <h1>Robot Users</h1>
-    {users.map((user, index) => {
-      return  <UserCard key={index} user={user} detailPath={`/detail/${index}`} />
+    <h1 className="text-3xl font-bold mb-4" >Eventi</h1>
+    {events.map((event) => {
+      return  <EventCard key={event.id} event={event} detailPath={`/detail/${event.id}`}/>
     })}
   </div>
    
