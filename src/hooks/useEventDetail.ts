@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { EventsType } from "../repo/events.type"
+import { EventDetailType } from "../repo/events.type"
 import { getEventDetail } from "../repo"
 
 
@@ -9,12 +9,12 @@ export const useEventDetail = () => {
     //sta caricando o meno
     const [isLoading, setIsLoanding] = useState<boolean>(true);
     // spazio di memoria per caricare gli eventi ricevuti dall' API
-    const [eventDetail, setEventDetail] = useState<EventsType[]>([]);
+    const [eventDetail, setEventDetail] = useState<EventDetailType>();
     // il seguente use effect applica la lista degli eventi
     // all'avvio del compnente (nessuna diependenza specificata) 
     const getDetail = (id : number) => {
         getEventDetail(id).then((eventDetail) =>{
-            setEventDetail(eventDetail);
+            setEventDetail(eventDetail!);
             setIsLoanding(false);
         }
     

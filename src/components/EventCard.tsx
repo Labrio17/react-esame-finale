@@ -17,6 +17,7 @@ const EventCard = ({event, detailPath} : EventCardType) => {
         coverImage,
         date,
         tags,
+        description
     } = event
 
     //reinderizzo il componente relativo a un singolo utente
@@ -30,7 +31,10 @@ const EventCard = ({event, detailPath} : EventCardType) => {
             <div className="text-center">
     <h1 className="text-xl font-bold mb-4 text-black">{name}</h1>
     <p className="text-gray-500 mb-4">
-       Orario : {date}
+       Short description : {description.short}
+    </p>
+    <p className="text-gray-500 mb-4">
+       Opening hour : {date}
     </p>
     <div className="mb-6">
         {tags.map((element, index) => (
@@ -40,7 +44,7 @@ const EventCard = ({event, detailPath} : EventCardType) => {
         ))}
     </div>
     <Link to={detailPath}>
-        <p className="bg-blue-500 text-white px-4 py-2 rounded-lg mb-2">Scopri di più</p>
+        <p className=" bg-slate-800 hover:bg-blue-500 hover:text-gray-700 text-white px-4 py-2 rounded-lg mb-2">Know more ...</p>
     </Link>
    
 </div>
